@@ -2,7 +2,7 @@ file_input = open("Input.txt")
 
 w, h = 9, 9
 Matrix = [[0 for x in range(w)] for y in range(h)] 
-
+aValues=[1,2,3,4,5,6,7,8,9]
 vRow=0
 vColumn=0
 while vColumn != 9:
@@ -22,23 +22,20 @@ for column in range(9):
     if Matrix[column][0] != 0:# Fills in the current value of the matrix
         aFoundColumn.append(Matrix[column][0])
 
-aPossible = []
+aFound = []
     
 for x in range(0, len(aFoundRow)):
     if aFoundRow[x] !=0 and aFoundColumn[x] !=0 :
-        aPossible.append(aFoundColumn[x])
-        aPossible.append(aFoundRow[x])
+        aFound.append(aFoundColumn[x])
+        aFound.append(aFoundRow[x])
         
 
-aPossible = list(set(aPossible))   
-aPossible.sort()
+aFound = list(set(aFound)) 
+aFound = list(map(int, aFound))
+aPossible=[]
+aPossible = list(set(aValues) - set(aFound))
 print(aPossible)
 
-for x in range(9):
-    for row in range(9):
-        for column in range(9):
-            if Matrix[column][row] == 0:# Fills in the current value of the matrix
-                Matrix[column][row] = aPossible[x]
 
 for x in range(9): # Prints table
     for y in range(9):
