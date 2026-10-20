@@ -1,6 +1,6 @@
 file_input = open("Input.txt")
 
-w, h = 9, 9
+w, h = 9, 9 
 Matrix = [[0 for x in range(w)] for y in range(h)] 
 aValues=[1,2,3,4,5,6,7,8,9]
 vRow=0
@@ -30,13 +30,18 @@ for x in range(0, len(aFoundRow)):
         aFound.append(aFoundRow[x])
         
 
-aFound = list(set(aFound)) 
-aFound = list(map(int, aFound))
+aFound = list(set(map(int, aFound)))
+
 aPossible=[]
-aPossible = list(set(aValues) - set(aFound))
+aPossible = list(set(aValues) - set(aFound))#
+aPossible.sort()
+aPossible= list(map(str, aPossible))
 print(aPossible)
 
 
+Matrix[0][0] = aPossible[0] + " "# Fills in the current value of the matrix
+aPossible.pop(0)
+        
 for x in range(9): # Prints table
     for y in range(9):
         print(Matrix[x][y], end = "")
