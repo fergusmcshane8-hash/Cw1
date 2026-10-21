@@ -1,3 +1,6 @@
+from tabnanny import check
+
+
 file_input = open("Input.txt")
 
 w, h = 9, 9 
@@ -11,51 +14,65 @@ while vColumn != 9:
         vRow = vRow + 1 #iterates through the columns 
     vRow = 0 # resets the column so next row is able to be read
     vColumn = vColumn + 1 #slowly goes through it all
-
-
-aFoundRow=[]
-aFoundColumn =[]
-
-i=0
-
-
-while i < len(Matrix):
-    j=0
-    while j < len(Matrix[i]):
-        for row in range(9):
-            if Matrix[0][row] != 0:# Fills in the current value of the matrix
-                aFoundRow.append(Matrix[0][row])
-        for column in range(9):
-            if Matrix[column][0] != 0:# Fills in the current value of the matrix
-                aFoundColumn.append(Matrix[column][0])
-
-        aFound = []
-            
-        for x in range(0, len(aFoundRow)):
-            if aFoundRow[x] !=0 and aFoundColumn[x] !=0 :
-                aFound.append(aFoundColumn[x])
-                aFound.append(aFoundRow[x])
-                
-
-        aFound = list(set(map(int, aFound)))
-
-        aPossible=[]
-        aPossible = list(set(aValues) - set(aFound))#
-        aPossible.sort()
-        aPossible= list(map(str, aPossible))
-
-        print(aPossible)
-
-        
-        if Matrix[i][j] != 0:
-            Matrix[i][j] = aPossible[i] + " "# Fills in the current value of the matrix
-            aPossible.pop(0)
-            
-        j = j + 1
-    i = i + 1
     
-print("breaks")
+def Print(Matrix):
+    for x in range(9): # Prints table
+        for y in range(9):
+            print(Matrix[x][y], end = "")
+            
 
-for x in range(9): # Prints table
-    for y in range(9):
-        print(Matrix[x][y], end = "")
+def search(Matrix, aValues):
+    aFound = []
+
+    
+    for row in range(len(Matrix)):
+        for column in range(len(Matrix)):
+            if Matrix[column][row] != str(0) + " " :# Fills in the current value of the matrix
+                aFound.append(Matrix[column][row])
+            
+    aFound = list(set(map(int, aFound)))
+    print(aFound)
+    aPossible=[]
+    aPossible = list(set(aValues) - set(aFound))
+    aPossible.sort()
+    aPossible= list(map(str, aPossible))
+    return aPossible
+
+aPossible = search(Matrix, aValues)
+print(aPossible)
+def Check(Matrix):
+    tester = True
+    if tester == True:
+        for row in range(len(Matrix)):
+            if Matrix[0][row] == str(0) + " ":
+                row = row + 1
+                search(Matrix, aValues)
+                for column in range(len(Matrix)):
+                    if Matrix[column][0] == str(0) + " ":
+                        column = column + 1
+                        search(Matrix, aValues)
+            else:
+                Print(Matrix)
+                tester = False
+
+
+
+def Input(Matrix, aPossible):
+    
+    """        
+    if Matrix[0][0] == str(0) + " ":
+        Matrix[0][0] = aPossible[0] + " "# Fills in the current value of the matrix
+        aPossible.pop(0)
+    """
+    for row in range(len(Matrix)):
+        for column in range(len(Matrix)):
+            if Matrix[column][row] == str(0) + " " :# Fills in the current value of the matrix
+                Matrix[column][row] = aPossible[0] + " "# Fills in the current value of the matrix
+                aPossible.pop(0)
+    Check(Matrix)
+    return(Matrix)
+
+Input(Matrix, aPossible)
+
+
+#Print(Matrix)
