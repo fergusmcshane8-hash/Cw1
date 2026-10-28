@@ -1,7 +1,6 @@
-from tabnanny import check
 import time 
 
-start = time.perf_counter() # Starts a timer to know how long it takes to solve 
+start = time.perf_counter()
 
 file_input = open("Input.txt") #Opens the file 
 
@@ -11,12 +10,12 @@ aValues=["1","2","3","4","5","6","7","8","9"] #Creates an array of possible valu
 vRow=0
 vColumn=0
 #MATRIX[row][column] # Note of Values of a Matrix
-while vColumn != 9:
-    while vRow != 9: # loops until the Matrix is 9x9
-        Matrix[vColumn][vRow] = file_input.read(2).strip() # Fills in the current value of the matrix
-        vRow = vRow + 1 #iterates through the columns 
-    vRow = 0 # resets the column so next row is able to be read
-    vColumn = vColumn + 1 #slowly goes through it all
+while vRow != 9:
+    while vColumn != 9: # loops until the Matrix is 9x9
+        Matrix[vRow][vColumn] = file_input.read(2).strip()# Fills in the current value of the matrix
+        vColumn = vColumn + 1 #iterates through the columns 
+    vColumn = 0 # resets the column so next row is able to be read
+    vRow = vRow + 1 #slowly goes through it all
 file_input.close() # Closes the file after reading it 
 
 def Print(Matrix): # A Function that is called when the Matrix has been correctly filled 
@@ -28,7 +27,7 @@ def Print(Matrix): # A Function that is called when the Matrix has been correctl
     
     end = time.perf_counter() # ends the timer once the table is printed
     vTimetaken = end - start # calculates the time taken for the program to run
-    print(vTimetaken) #displays the time taken 
+    print(vTimetaken, "Seconds") #displays the time taken 
     
 def check(Matrix, row, col, aValues): # A function to check possible values for the Matrix
     
@@ -70,7 +69,6 @@ def Input(Matrix): #Creates the Function to input values
         else:
             Matrix[row][col] = "0" # if the returned Matrix is incorrect will reset the matrix and try the next possible value
     return False   # if there is no correct value will return false as no solution is possible 
-
 
 if Input(Matrix): # Calls the Input function with the base Matrix
     Print(Matrix) # will call the Print function to display the output of the matrix 
