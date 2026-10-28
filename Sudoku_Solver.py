@@ -2,7 +2,7 @@ import time
 
 start = time.perf_counter()
 
-file_input = open("Input.txt") #Opens the file 
+file_input = open("Basic.txt") #Opens the file 
 
 w, h = 9, 9 
 Matrix = [[0 for x in range(w)] for y in range(h)] 
